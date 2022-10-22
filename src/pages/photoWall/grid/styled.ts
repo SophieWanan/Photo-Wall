@@ -2,8 +2,8 @@ import styled from "styled-components";
 
 export const ThumbnailWrapper = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-flow: wrap;
   justify-content: center;
   align-items: center;
-  height: 100%;
+  width: 1000px;
 `;

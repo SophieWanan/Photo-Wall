@@ -1,31 +1,47 @@
-import React, { useEffect } from "react";
-import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { random, sortBy } from "lodash";
 import { Grid } from "./grid";
+import { UNSPLASH_DATA } from "../../constants/photos";
 import { Header } from "./header";
-const photos = ["photo_1", "photo_2", "photo_3"];
-const pictures = photos.map((photo) =>
-  require("../../../public/static/" + photo + ".jpg")
-);
+import { Wrapper } from "./styled";
+
+export interface Pictures {
+  url: string;
+  sortBy: number;
+}
+
+let pictures = UNSPLASH_DATA.map((item) => {
+  return {
+    url: item.urls.full,
+    sortBy: random(0, 10, true),
+  };
+});
 
 export const PhotoWall: React.FC = () => {
+  const [order, setOrder] = useState<boolean>(false);
+
   useEffect(() => {
-    getData();
-  }, []);
-  const getData = async () => {
-    await axios
-      .get("https://unsplash.com/napi/photos")
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((e) => {
-        console.log('e', e);
-      })
-      .finally();
+    pictures = pictures.map((picture) => {
+      return {
+        url: picture.url,
+        sortBy: random(0, 10, true),
+      };
+    });
+  }, [order]);
+
+  const rearrange = (rearrange: boolean) => {
+    setOrder(rearrange);
   };
+
   return (
     <>
-      <Header />
-      <Grid pictures={pictures} onPictureClick={() => {}}></Grid>
+      <Header rearrange={rearrange} />
+      <Wrapper>
+        <Grid
+          pictures={sortBy(pictures, (p) => p.sortBy)}
+          onPictureClick={() => {}}
+        ></Grid>
+      </Wrapper>
     </>
   );
 };

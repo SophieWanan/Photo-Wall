@@ -8,7 +8,6 @@ export const Photo = styled(motion.img)`
 `;
 
 export const PhotoContainer = styled(motion.div)`
-  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
