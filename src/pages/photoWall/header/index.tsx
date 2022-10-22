@@ -9,7 +9,7 @@ export const Header: React.FC<IProps> = ({ rearrange }) => {
   const [order, setOrder] = useState<boolean>(false);
   useEffect(() => {
     rearrange(order);
-  }, [order]);
+  }, [order, rearrange]);
   return (
     <HeaderWrapper>
       <SortByRatedButton onClick={() => setOrder(!order)}>

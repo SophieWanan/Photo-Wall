@@ -39,7 +39,6 @@ export const PhotoWall: React.FC = () => {
       <Wrapper>
         <Grid
           pictures={sortBy(pictures, (p) => p.sortBy)}
-          onPictureClick={() => {}}
         ></Grid>
       </Wrapper>
     </>

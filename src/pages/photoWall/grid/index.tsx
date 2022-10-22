@@ -5,20 +5,22 @@ import { Pictures } from "../index";
 
 interface IProps {
   pictures: Pictures[];
-  onPictureClick: (picture: string) => void;
-
+  onPictureClick?: (picture: string) => void;
 }
 
 export const Grid: React.FC<IProps> = ({ pictures, onPictureClick }) => {
   return (
     <ThumbnailWrapper>
-      {pictures.map((picture) => (
-        <Thumbnail
-          URL={picture.url}
-          key={picture.url}
-          onClick={onPictureClick}
-        ></Thumbnail>
-      ))}
+      {pictures.map(
+        (picture) =>
+          onPictureClick && (
+            <Thumbnail
+              URL={picture.url}
+              key={picture.url}
+              onClick={onPictureClick}
+            ></Thumbnail>
+          )
+      )}
     </ThumbnailWrapper>
   );
 };
